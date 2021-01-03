@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-readonly VERSION=${1:-18.04}
+readonly VERSION=${1:-20.04}
 exec /ubuntu/${VERSION}/build-disk.sh "$HOME/.ssh/id_rsa.pub" "/iso/ubuntu-${VERSION}-netboot-amd64-unattended.iso"
