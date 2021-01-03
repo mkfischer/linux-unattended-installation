@@ -4,6 +4,8 @@ RUN export DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 RUN apt-get install -y cpio \
   dos2unix \
+  qemu-img \
+  qemu-kvm \
   fakeroot \
   genisoimage \
   git \
