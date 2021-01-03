@@ -17,11 +17,21 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TMP_ISO_DIR="`mktemp -d`"
 eval "$SCRIPT_DIR/build-iso.sh" "$SSH_PUBLIC_KEY_FILE" "$TMP_ISO_DIR/ubuntu-20.04-netboot-amd64-unattended.iso"
 
+# test
+if [[ -z ${BIN_QEMU_IMG} ]]
+then
+    printf "\nCan not find qemu-img\n"
+    exit(1)
+fi
+
 # create image and run installer
-/usr/bin/printf "${BIN_QEMU_IMG}"
-/usr/bin/printf "${DISK_FILE}"
-/usr/bin/printf "${DISK_FILE}"
-/usr/bin/printf "${DISK_FILE}"
+/usr/bin/printf "\n${BIN_QEMU_IMG}\n"
+/usr/bin/printf "${DISK_FILE}\n"
+/usr/bin/printf "${DISK_FILE}\n"
+/usr/bin/printf "${DISK_FILE}\n"
+
+
+
 
 "$BIN_QEMU_IMG" create "$DISK_FILE" -f "$DISK_FORMAT" "$DISK_SIZE"
 "$BIN_KVM" -nographic -cpu host -m "$RAM_SIZE" -cdrom "$TMP_ISO_DIR/ubuntu-20.04-netboot-amd64-unattended.iso" -boot once=d "$DISK_FILE"
