@@ -17,10 +17,16 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TMP_ISO_DIR="`mktemp -d`"
 eval "$SCRIPT_DIR/build-iso.sh" "$SSH_PUBLIC_KEY_FILE" "$TMP_ISO_DIR/ubuntu-20.04-netboot-amd64-unattended.iso"
 
-# test
-if [[ -z ${BIN_QEMU_IMG} ]]
+if [ ${HOSTNAME} == "jenkins" ]
 then
-    printf "\nCan not find qemu-img\n"
+    BIN_QEMU_IMG="/usr/bin/qemu-img"
+    BIN_KVM="/usr/bin/kvm"
+fi
+
+# test
+if [[ -z ${BIN_QEMU_IMG} ]] || [[ -z ${BIN_QEMU_IMG} ]]
+then
+    printf "\nCan not find qemu-img or kvm\n"
     exit(1)
 fi
 
