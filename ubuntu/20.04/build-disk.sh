@@ -21,6 +21,8 @@ if [ ${HOSTNAME} == "jenkins" ]
 then
     BIN_QEMU_IMG="/usr/bin/qemu-img"
     BIN_KVM="/usr/bin/kvm"
+else
+    exit(1)
 fi
 
 # test
@@ -31,8 +33,11 @@ fi
 #fi
 
 # create image and run installer
-"$BIN_QEMU_IMG" create "$DISK_FILE" -f "$DISK_FORMAT" "$DISK_SIZE"
-"$BIN_KVM" -nographic -cpu host -m "$RAM_SIZE" -cdrom "$TMP_ISO_DIR/ubuntu-20.04-netboot-amd64-unattended.iso" -boot once=d "$DISK_FILE"
+#"${BIN_QEMU_IMG}" create "$DISK_FILE" -f "$DISK_FORMAT" "$DISK_SIZE"
+#"${BIN_KVM}" -nographic -cpu host -m "$RAM_SIZE" -cdrom "$TMP_ISO_DIR/ubuntu-20.04-netboot-amd64-unattended.iso" -boot once=d "$DISK_FILE"
+
+/usr/bin/qemu-img create "$DISK_FILE" -f "$DISK_FORMAT" "$DISK_SIZE"
+/usr/bin/kvm -nographic -cpu host -m "$RAM_SIZE" -cdrom "$TMP_ISO_DIR/ubuntu-20.04-netboot-amd64-unattended.iso" -boot once=d "$DISK_FILE"
 
 # remove tmp
 rm -r -f "$TMP_ISO_DIR"
