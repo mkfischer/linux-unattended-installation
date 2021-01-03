@@ -24,11 +24,11 @@ then
 fi
 
 # test
-if [[ -z ${BIN_QEMU_IMG} ]] || [[ -z ${BIN_QEMU_IMG} ]]
-then
-    printf "\nCan not find qemu-img or kvm\n"
-    exit(1)
-fi
+#if [[ -z ${BIN_QEMU_IMG} ]] || [[ -z ${BIN_QEMU_IMG} ]]
+#then
+#    /usr/bin/printf "\nCan not find qemu-img or kvm\n"
+#    exit(1)
+#fi
 
 # create image and run installer
 "$BIN_QEMU_IMG" create "$DISK_FILE" -f "$DISK_FORMAT" "$DISK_SIZE"
