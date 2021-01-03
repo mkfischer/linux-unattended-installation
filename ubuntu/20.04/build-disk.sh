@@ -24,7 +24,7 @@ eval "$SCRIPT_DIR/build-iso.sh" "$SSH_PUBLIC_KEY_FILE" "$TMP_ISO_DIR/ubuntu-20.0
 /usr/bin/printf "${DISK_FILE}"
 
 "$BIN_QEMU_IMG" create "$DISK_FILE" -f "$DISK_FORMAT" "$DISK_SIZE"
-"$BIN_KVM" -nographic -cpu host -m " -m "$RAM_SIZE" -cdrom "$TMP_ISO_DIR/ubuntu-20.04-netboot-amd64-unattended.iso" -boot once=d "$DISK_FILE"
+"$BIN_KVM" -nographic -cpu host -m "$RAM_SIZE" -cdrom "$TMP_ISO_DIR/ubuntu-20.04-netboot-amd64-unattended.iso" -boot once=d "$DISK_FILE"
 
 # remove tmp
 rm -r -f "$TMP_ISO_DIR"
